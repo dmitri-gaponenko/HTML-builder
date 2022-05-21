@@ -1,6 +1,6 @@
 const fs = require('fs/promises');
 const path = require('path');
-const { createReadStream, createWriteStream }= require('fs');
+const { createReadStream, createWriteStream } = require('fs');
 
 const projectDistFolderPath = path.join(__dirname, 'project-dist');
 const stylesFolderPath = path.join(__dirname, 'styles');
@@ -16,7 +16,7 @@ const stylesFolderPath = path.join(__dirname, 'styles');
       const stream = createReadStream(path.join(stylesFolderPath, cssFile.name), 'utf-8');
       let data = '';
       stream.on('data', chunk => data += chunk);
-      stream.on('end', () => bundle.write(data));
+      stream.on('end', () => bundle.write(data + '\n'));
       stream.on('error', error => console.log('Error', error.message));
     }
     console.log('Bundle created');
